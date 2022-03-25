@@ -65,7 +65,7 @@
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="index.php">
               <!-- Logo icon -->
               <b class="logo-icon ps-2">
                 <img

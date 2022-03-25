@@ -13,12 +13,7 @@
       }
     </style>
     <!-- Favicon icon -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="../assets/images/favicon.png"
-    />
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/bttslogo.png">
     <!-- Custom CSS -->
     <link href="../dist/css/style.min.css" rel="stylesheet" />
   </head>
@@ -92,7 +87,7 @@
                       ></span>
                     </div>
                     <input
-                      type="text"
+                      type="password"
                       class="form-control form-control-lg"
                       placeholder="Password"
                       aria-label="Password"

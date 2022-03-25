@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/bttslogo.png">
     <title>Courses</title>
 </head>
 <body>
@@ -32,14 +33,10 @@
             <table class="table table-hover table-bordered table-dark">
                 <thead>
                     <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">S. No.</th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Course Code</th>
+                    <th scope="col">Starting Year</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,14 +44,10 @@
                         for($i=1; $i<15; $i++)
                         {
                             print("<tr>");
-                            print("<th scope='row'>$i</th>");
-                            print("<td>Mark</td>");
-                            print("<td>Otto</td>");
-                            print("<td>@mdo</td>");
-                            print("<th scope='row'>$i</th>");
-                            print("<td>Mark</td>");
-                            print("<td>Otto</td>");
-                            print("<td>@mdo</td>");
+                            print("<th>$i</th>");
+                            print("<td>BCA</td>");
+                            print("<td>011</td>");
+                            print("<td>2019</td>");
                             print("</tr>");
                         }
                     ?>
