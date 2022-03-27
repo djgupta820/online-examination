@@ -1,3 +1,7 @@
+<?php
+  include("logint.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -141,7 +145,9 @@
         </div>
         </div>
         <footer class="footer text-center">
-         <button class="btn btn-outline-primary">Logout</button>
+          <form action="logoutt.php" method="get">
+            <button class="btn btn-outline-primary">Logout</button>
+          </form>
         </footer>
     </div>
 </body>

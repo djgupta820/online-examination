@@ -1,3 +1,7 @@
+<?php
+  session_start();
+  $_SESSION['username'] = $_POST['username'];
+?>
 <!DOCTYPE html>
 <html dir="ltr">
   <head>
@@ -57,7 +61,8 @@
             <form
               class="form-horizontal mt-3"
               id="loginform"
-              action="index.html"
+              action="logint.php"
+              method="GET"
             >
               <div class="row pb-4">
                 <div class="col-12">
@@ -74,6 +79,8 @@
                       class="form-control form-control-lg"
                       placeholder="Username"
                       aria-label="Username"
+                      name="username"
+                      id="username"
                       aria-describedby="basic-addon1"
                       required=""
                     />
@@ -91,6 +98,8 @@
                       class="form-control form-control-lg"
                       placeholder="Password"
                       aria-label="Password"
+                      name="password"
+                      id="password"
                       aria-describedby="basic-addon1"
                       required=""
                     />
