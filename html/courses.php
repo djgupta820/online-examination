@@ -41,14 +41,25 @@
                 </thead>
                 <tbody>
                     <?php 
-                        for($i=1; $i<15; $i++)
-                        {
-                            print("<tr>");
-                            print("<th>$i</th>");
-                            print("<td>BCA</td>");
-                            print("<td>011</td>");
-                            print("<td>2019</td>");
-                            print("</tr>");
+                        $host = "localhost";
+                        $user = "root";
+                        $pass = "";
+                        $db = "btts";
+                        $conn = new mysqli($host, $user, $pass, $db);
+                        $sql = "select Course_name, Course_code, Started_year from courses"; 
+                        
+                        $res = $conn->query($sql);
+                        if($res->num_rows > 0){
+                          $i=1;
+                          while($row = $res->fetch_assoc()){
+                              print("<tr>");
+                              print("<th>$i</th>");
+                              print("<td>".$row['Course_name']."</td>");
+                              print("<td>".$row['Course_code']."</td>");
+                              print("<td>".$row['Started_year']."</td>");
+                              print("</tr>");
+                              $i++;
+                          }
                         }
                     ?>
                 </tbody>

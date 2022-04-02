@@ -1,7 +1,3 @@
-<?php
-  session_start();
-  $_SESSION['username'] = $_POST['username'];
-?>
 <!DOCTYPE html>
 <html dir="ltr">
   <head>
@@ -62,7 +58,7 @@
               class="form-horizontal mt-3"
               id="loginform"
               action="logint.php"
-              method="GET"
+              method="POST"
             >
               <div class="row pb-4">
                 <div class="col-12">

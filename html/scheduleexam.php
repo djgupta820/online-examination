@@ -39,7 +39,7 @@
         </div>
         
         <div class="container">
-            <form action="">
+            <form action="schedulexam.php" method="POST">
               <div class="form-group">
                 <label for="course">Select Course</label>
                 <select name="course" class="form-control" required>
@@ -82,14 +82,15 @@
                 <label for="extype">Exam Type</label>
                 <select name="extype" id="extype" class="form-control" required>
                   <option value="sel">select</option>
-                  <option value="subj">Subjective</option>
-                  <option value="obj">Objective</option>
+                  <option value="subjective">Subjective</option>
+                  <option value="objective">Objective</option>
                 </select>
               </div>
               <button class="btn btn-primary">Next</button>
             </form>
         </div>
         <?php
+        print("<p></p>");
             include("footer.php");
         ?>
     </div>

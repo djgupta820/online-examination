@@ -36,33 +36,40 @@
                     <th scope="col">S. No.</th>
                     <th scope="col">Course Name</th>
                     <th scope="col">Course Code</th>
-                    <th scope="col">Year</th>
                     <th scope="col">Semester</th>
                     <th scope="col">Subject</th>
                     <th scope="col">Subject Code</th>
-                    <th scope="col">Date</th>
+                    <th scope="col">Date of Exam</th>
                     <th scope="col">Start Time</th>
                     <th scope="col">End Time</th>
-                    <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
-                        for($i=1; $i<15; $i++)
-                        {
-                            print("<tr>");
-                            print("<th>$i</th>");
-                            print("<td>BCA</td>");
-                            print("<td>011</td>");
-                            print("<td>Third</td>");
-                            print("<th>Sixth</th>");
-                            print("<td>C++</td>");
-                            print("<td>BCA 152</td>");
-                            print("<td>".date("Y/m/d")."</td>");
-                            print("<td>".date("h:i:sa")."</td>");
-                            print("<td>".date("h:i:sa")."</td>");
-                            print("<td><a href='#'>Details</a></td>");
-                            print("</tr>");
+                    <?php
+                        $host = "localhost";
+                        $user = "root";
+                        $pass = "";
+                        $db = "btts";
+                        $conn = new mysqli($host, $user, $pass, $db);
+                        $sql = "select course_name, course_code, semester, subject, subject_code, date_of_exam, start_time, end_time from previous_exams"; 
+                        
+                        $res = $conn->query($sql);
+                        if($res->num_rows > 0){
+                          $i=1;
+                          while($row = $res->fetch_assoc()){
+                              print("<tr>");
+                              print("<th>$i</th>");
+                              print("<td>".$row['course_name']."</td>");
+                              print("<td>".$row['course_code']."</td>");
+                              print("<td>".$row['semester']."</td>");
+                              print("<th>".$row['subject']."</th>");
+                              print("<td>".$row['subject_code']."</td>");
+                              print("<td>".$row['date_of_exam']."</td>");
+                              print("<td>".$row['start_time']."</td>");
+                              print("<td>".$row['end_time']."</td>");
+                              print("</tr>");
+                              $i++;
+                          }
                         }
                     ?>
                     

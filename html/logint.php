@@ -9,9 +9,10 @@
         }
 
         public function login(){
+            error_reporting(E_ERROR | E_PARSE);
+            $username = $_POST["username"];
+            $passwd = $_POST["password"];
 
-            $username = $_REQUEST["username"];
-            $passwd = $_REQUEST["password"];
             //print(var_dump($_REQUEST));
 
             $conn = new mysqli($this->host, $this->user, $this->pass, $this->db);
@@ -20,7 +21,7 @@
                 die("Connection Error: ".$conn->connect->error);
             }
             else{
-                if(isset($_REQUEST["username"])){
+                if(isset($_POST["username"])){
                     $sql = "select First_name, Last_name, User_name, Login_password from users where User_name ='".$username."' and Login_password ='".md5($passwd)."'";
                     $res = $conn->query($sql);
                     if($res->num_rows > 0){
@@ -33,8 +34,8 @@
                         }
                         else{
                             $script = " <script type='text/JavaScript'> alert('Invalid Credentials!'); </script> ";
-                            print($script);
-                            header("Location: http://localhost/matrix-admin-bt5/html/login.php");
+                            print($script);/*
+                            header("Location: http://localhost/matrix-admin-bt5/html/login.php");*/
                         }
                     }
                 }

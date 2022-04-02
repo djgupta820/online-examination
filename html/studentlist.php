@@ -39,7 +39,7 @@
         </div>
         <div class="container">
           <div class="sel">
-            <form action="">
+            <form action="studentsdata.php" method="GET">
               <div class="form-group">
                 <label for="course">Select Course</label>
                 <select name="course" class="form-control">
@@ -65,39 +65,6 @@
               <button class="btn btn-primary">Fetch</button>
             </form>
           </div>
-            <table class="table table-hover table-bordered table-dark" style="box-shadow:3px 2px 2px gray;">
-                <thead>
-                    <tr>
-                    <th scope="col">S. No.</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Date of Birth</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Mobile Number</th>
-                    <th scope="col">Course</th>
-                    <th scope="col">Roll Number</th>
-                    <th scope="col">Semester</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                        for($i=1; $i<15; $i++)
-                        {
-                            print("<tr>");
-                            print("<th>$i</th>");
-                            print("<td>Mark</td>");
-                            print("<td>Otto</td>");
-                            print("<td>17/04/2000</td>");
-                            print("<th>Dakshinpuri</th>");
-                            print("<td>9810685369</td>");
-                            print("<td>BCA</td>");
-                            print("<td>01228402019</td>");
-                            print("<td>Sixth</td>");
-                            print("</tr>");
-                        }
-                    ?>
-                </tbody>
-            </table>
         </div>
         <?php
             include("footer.php");
