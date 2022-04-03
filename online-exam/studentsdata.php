@@ -87,6 +87,11 @@
                     $i++;
                 }
                 print("</table>");
+                $btn = '<div class="d-grid gap-2 d-md-block" style="margin:20px;">
+                            <a href="index.php" class="btn btn-primary"> Home </a>
+                            <a href="studentlist.php" class="btn btn-primary"> Back </a>
+                        </div>';
+                print($btn);
             }
             else{
                 $alert = '<div class="alert alert-danger" role="alert">

@@ -10,7 +10,12 @@
         if(move_uploaded_file($temp_dir, $target_dir)){
             $msg = '<div class="alert alert-success" role="alert">
                         file uploaded successfully!
-                    </div>';
+                    </div>
+                    <div>
+                        <a href="questionpaper.php" class="btn btn-primary">Preview</a>
+                        <a href="index.php" class="btn btn-primary"> Home </a>
+                    </div>
+                    ';
             print($msg);
         }
         else{

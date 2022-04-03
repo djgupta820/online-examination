@@ -1,4 +1,5 @@
 <?php
+    error_reporting(E_ERROR | E_PARSE);
     print('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">');
     function getExamDetails(){
         
@@ -36,7 +37,8 @@
         <form action="upload.php" method="post" class="form-group" enctype="multipart/form-data">
             <label for="file"> <h1>Upload File </h1></label>
             <input type="file" name="fileToUpload" class="form-control" id="fileToUpload"><br>
-            <button tupe="button" class="btn btn-primary btn-sm" name="submit" style="margin-top:20px;">Done</button>
+            <button tupe="button" class="btn btn-primary" name="submit" style="margin-top:20px;">Done</button>
+            <a href="scheduleexam.php" class="btn btn-primary" style="margin-top:20px;float:right;"> Back </a>
         </form>
     </div>
 </body>
