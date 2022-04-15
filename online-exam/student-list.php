@@ -1,3 +1,14 @@
+<?php
+  print('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">');
+  if(!isset($_COOKIE['tusername'])){
+      $script = " <div class='alert alert-danger'>
+                      <p>Access Denied! Login Required!</p>
+                      Click <a href='login.php'>Here </a> to login
+                  </div>";
+      print($script);
+      exit();
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,27 +50,39 @@
         </div>
         <div class="container">
           <div class="sel">
-            <form action="studentsdata.php" method="GET">
+            <form action="students-data.php" method="GET">
               <div class="form-group">
                 <label for="course">Select Course</label>
                 <select name="course" class="form-control">
                   <option value="sel">Select</option>
-                  <option value="bca">BCA</option>
-                  <option value="bsc">BSC</option>
+                  <?php
+                    $host = "localhost";
+                    $pass = "";
+                    $user = "root";
+                    $db = "btts";
+                    $conn = new mysqli($host, $user, $pass, $db);
+                    $sql = "select Course_name from courses";
+                    $res = $conn->query($sql);
+                    if($res->num_rows > 0){
+                      while($row=$res->fetch_assoc()){
+                        print("<option value=".$row['Course_name'].">".$row['Course_name']."</option>");
+                      }
+                    }
+                  ?>
                 </select>
               </div>
               <div class="form-group">
                   <label for="semester">Select Semester</label>
                   <select name="semester" class="form-control">
                   <option value="sel">Select</option>
-                  <option value="First">First</option>
-                  <option value="Second">Second</option>
-                  <option value="third">Third</option>
-                  <option value="forth">Forth</option>
-                  <option value="fifth">Fifth</option>
-                  <option value="sixth">Sixth</option>
-                  <option value="seven">Seventh</option>
-                  <option value="eight">Eighth</option>
+                  <option value="1">First</option>
+                  <option value="2">Second</option>
+                  <option value="3">Third</option>
+                  <option value="4">Forth</option>
+                  <option value="5">Fifth</option>
+                  <option value="6">Sixth</option>
+                  <option value="7">Seventh</option>
+                  <option value="8">Eighth</option>
                 </select>
               </div>
               <button class="btn btn-primary">Fetch</button>

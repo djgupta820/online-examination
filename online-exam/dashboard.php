@@ -144,11 +144,9 @@
             </div>
         </div>
         </div>
-        <footer class="footer text-center">
-          <form action="logoutt.php" method="get">
-            <button class="btn btn-outline-primary">Logout</button>
-          </form>
-        </footer>
+        <?php
+          include('ooter.php');
+        ?>
     </div>
 </body>
 </html>

@@ -1,3 +1,14 @@
+<?php
+  print('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">');
+  if(!isset($_COOKIE['tusername'])){
+      $script = " <div class='alert alert-danger'>
+                      <p>Access Denied! Login Required!</p>
+                      Click <a href='login.php'>Here </a> to login
+                  </div>";
+      print($script);
+      exit();
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +16,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/bttslogo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+            
     <style>
         .cp{
             border:1px solid gray;
@@ -39,25 +52,15 @@
             </div>
           </div>
         </div>
-        <div class="cp">
-            <form action="" method="POST">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">current password</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">new password</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">new password</label>
-                </div>
-                <button type="button" class="btn btn-outline-success">Change</button>
-            </form>
-        </div>
+        <form action="changepass.php" method="post" class="form-group cp">
+          <label for="cpass">Current Password</label>
+          <input type="text" name="cpass" id="cpass" class="form-control" required><br>
+          <label for="npass1">New Password</label>
+          <input type="text" name="npass1" id="cpass" class="form-control" required><br>
+          <label for="npass2">Repeat Password</label>
+          <input type="text" name="npass2" id="cpass" class="form-control" required><br>
+          <button type="submit" class="btn btn-success">Change</button>
+        </form>
     </div>
         <?php
             include("footer.php");

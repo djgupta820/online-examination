@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
   <head>
@@ -112,13 +113,8 @@
               </li>
             </ul>
           </ul>
-        
               <!-- ============================================================== -->
-              <!-- End Messages -->
-              <!-- ============================================================== -->
-
-              <!-- ============================================================== -->
-              <!-- User profile and search -->
+              <!-- User profile -->
               <!-- ============================================================== -->
               <li class="nav-item">
                 <a
@@ -142,7 +138,11 @@
                     width="31"
                   />
                 </a>
-                <span> <b style="font-size:20px; color:white;"> Username </b> </span>
+                <span> <b style="font-size:20px; color:white;"> 
+                  <?php 
+                    error_reporting(E_ERROR | E_PARSE);
+                    print($_COOKIE['tfname']." ".$_COOKIE['tlname']." (".$_COOKIE['tusername'].")"); 
+                  ?> </b> </span>
               </li>
               <!-- ============================================================== -->
               <!-- User profile and search -->
@@ -175,7 +175,7 @@
                 <li class="sidebar-item">
                   <a
                     class="sidebar-link waves-effect waves-dark sidebar-link"
-                    href="studentlist.php"
+                    href="student-list.php"
                     aria-expanded="false"
                     ><i class="mdi mdi-format-list-bulleted"></i
                     ><span class="hide-menu">Student List</span></a
@@ -193,16 +193,16 @@
                 <li class="sidebar-item">
                   <a
                     class="sidebar-link waves-effect waves-dark sidebar-link"
-                    href="previousexams.php"
+                    href="previous-exams.php"
                     aria-expanded="false"
                     ><i class="mdi mdi-border-inside"></i
-                    ><span class="hide-menu">Previous Exams</span></a
+                    ><span class="hide-menu"> Exams</span></a
                   >
                 </li>
                 <li class="sidebar-item">
                   <a
                     class="sidebar-link waves-effect waves-dark sidebar-link"
-                    href="scheduleexam.php"
+                    href="schedule-exam.php"
                     aria-expanded="false"
                     ><i class="mdi mdi-blur-linear"></i
                     ><span class="hide-menu">Schedule Exam</span></a
@@ -220,7 +220,7 @@
                 <li class="sidebar-item">
                   <a
                     class="sidebar-link waves-effect waves-dark sidebar-link"
-                    href="cpassword.php"
+                    href="change-password.php"
                     aria-expanded="false"
                     ><i class="mdi mdi-key"></i
                     ><span class="hide-menu">Change Password</span></a

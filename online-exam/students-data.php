@@ -23,7 +23,7 @@
 
         public function createTable($course, $semester){
             $conn = $this->checkConn();
-            $sql = "create table ". $course."_".$semester."_sem(
+            $sql = "create table ". $course."(
                 First_Name varchar(15) not null,
                 Last_Name varchar(15) not null,
                 Date_of_Birth date not null,
@@ -35,7 +35,7 @@
             )";
 
             if ($conn->query($sql) === TRUE){
-                print("<br>Table". $course."_".$semester." created successfully");
+                print("<br>Table ". $course." created successfully");
             }
             else{
                 die("Error creating table".$conn->error);
@@ -44,16 +44,15 @@
 
         public function getData(){
             $course = $_GET['course'];
-            $year = $_GET['semester'];
-            $table = $_GET['course']."_".$_GET['semester']."_sem";
+            $sem = $_GET['semester'];
             
             $conn = $this->checkConn();
-            $sql = "select First_Name,Last_Name,Date_of_Birth,Address,Mobile_Number, Roll_Number, Course, Semester from ".$table;
+            $sql = "select First_Name,Last_Name,Date_of_Birth,Address,Mobile_Number, Roll_Number, Course, Semester from students where Course='".$course."' and Semester = ".$sem;
             $res = $conn->query($sql);
             print('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">');
             if($res->num_rows > 0){
                 
-                print("<div style='margin:20px;'><h1 style='text-align:center; text-decoration:underline;'>".strtoupper($table)."</h1>");
+                print("<div style='margin:20px;'><h1 style='text-align:center; text-decoration:underline;'>".strtoupper($course)." Students List</h1>");
                 $tab = '<table class="table table-hover table-bordered table-dark" style="box-shadow:3px 2px 2px gray;>
                         <thead>
                             <tr>
@@ -89,7 +88,7 @@
                 print("</table>");
                 $btn = '<div class="d-grid gap-2 d-md-block" style="margin:20px;">
                             <a href="index.php" class="btn btn-primary"> Home </a>
-                            <a href="studentlist.php" class="btn btn-primary"> Back </a>
+                            <a href="student-list.php" class="btn btn-primary"> Back </a>
                         </div>';
                 print($btn);
             }
@@ -97,7 +96,7 @@
                 $alert = '<div class="alert alert-danger" role="alert">
                                 No Data Availabel
                             </div>
-                            <div class="container" style="margin-bottom:20px;"><a href="studentlist.php" class="btn btn-primary">Back</a></div> </div>
+                            <div class="container" style="margin-bottom:20px;"><a href="student-list.php" class="btn btn-primary">Back</a></div> </div>
                             ';
                             
                 print($alert);

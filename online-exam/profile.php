@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/bttslogo.png">
     <style>
+        body{
+            background-color:#ECF0F1;
+        }
         .bx{
-            border:1px solid gray;
-            border-radius:10px;
             margin:20px;
             padding:20px;
         }
@@ -45,23 +46,35 @@
                     <div class="well well-sm">
                         <div class="row">
                             <div class="col-sm-6 col-md-4">
-                                <img src="../assets/images/users/1.jpg" alt="Profile Picture" class="rounded img-responsive" />
+                                <img src="../assets/images/users/1.jpg" alt="Profile Picture" height="150px" width="150px" style="border-radius:50%;"/>
                             </div>
                             <div class="col-sm-6 col-md-8">
-                                <h4>
-                                    Bhaumik Patel</h4>
-                                <small><cite title="San Francisco, USA">San Francisco, USA <i class="glyphicon glyphicon-map-marker">
-                                </i></cite></small>
-                                <p>
-                                    <i class="glyphicon glyphicon-envelope"></i>email@example.com
-                                    <br />
-                                    <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
-                                    <br />
-                                    <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p>
-                                <!-- Split button -->
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary">Update</button>
-                                </div>
+                                <?php
+                                    $conn = new mysqli('localhost', 'root','','btts');
+                                    if($conn->connect_error){
+                                        die("Error: ".$conn->connect_error);
+                                    }
+                                    else{
+                                        $sql = "select First_name, Last_name, Employee_ID, Designation, 
+                                                Email_ID, User_name, Login_password, Phone_number, Address
+                                                from users where User_name = '".$_COOKIE['tusername']."'";
+
+                                        $res = $conn->query($sql);
+                                        if($res->num_rows > 0){
+                                            while($row = $res->fetch_assoc()){ 
+                                                print('<h4> <label class="text-muted"> Full Name: </label> '. $row["First_name"]." ".$row["Last_name"].'</h4>');
+                                                print('<h5> <label for="" class="text-muted"> Username: </label> '.($row["User_name"]).'</h5>');
+                                                print('<small><cite title="San Francisco, USA">'.($row["Address"]).'<i class="glyphicon glyphicon-map-marker">
+                                                </i></cite></small><br>');
+                                                print('<label class="text-muted">Email ID: </label> <i class="glyphicon glyphicon-envelope"></i>'.($row["Email_ID"]).'</br>');
+                                                print('<label class="text-muted">Designation:  </label> <i class="glyphicon glyphicon-globe"></i>'.($row["Designation"]).'<br />');
+                                                print('<label class="text-muted">Employee ID: </label> <i class="glyphicon glyphicon-gift"></i>'.($row["Employee_ID"]).'<br />');
+                                                print('<label class="text-muted">Phone Number: </label> <i class="glyphicon glyphicon-gift"></i>'.($row["Phone_number"]).'<br />');
+                                                print('<label class="text-muted">Password Hash: </label> <i class="glyphicon glyphicon-gift"></i>'.($row["Login_password"]).'<br />');
+                                            }
+                                        }
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
