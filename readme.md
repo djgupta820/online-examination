@@ -53,7 +53,3 @@
 |Semester       |int(11)        |NO   |     |NULL   |     |
 |Login_Password |varchar(100)   |NO   |     |NULL   |     |
 
-`extra`
-|Field  |Type |
-| --- | --- |
-|faltu|char|
