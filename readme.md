@@ -1,12 +1,13 @@
 # Tables Used
-========  Courses  ==========
+##Courses
 
 ### Description
-desc courses;
-Field         | Type       | Null |Key |Default |Extra
-Course_name	  | varchar(50)| NO   |    |NULL	|
-Course_code	  | varchar(8) | NO	  |PRI |NULL    |
-Started_year  |	date	   | NO   |NULL|        |
+`desc courses`;
+|Field         | Type       | Null |Key |Default |Extra
+|--------------|------------|------|----|--------|
+|Course_name   | varchar(50)| NO   |    |NULL    |
+|Course_code   | varchar(8) | NO   |PRI |NULL    |
+|Started_year  |	date	| NO   |NULL|        |
 		
 
 
