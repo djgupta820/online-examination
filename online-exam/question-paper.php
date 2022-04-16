@@ -25,13 +25,9 @@
             text-align:center;
         }
     </style>
-    <script>
-        var element = document.querySelector("#container");
-        element.requestFullscreen()
-    </script>
     <title>Question Paper</title>
 </head>
-<body class="container sp" id="container">
+<body class="container" id="container" style="margin-left:15px;margin-right:15px;">
     <h1>Bosco Technical Training Society</h1>
     <?php
         /*
@@ -74,6 +70,6 @@
         chdir(".."); 
         $filename = "uploads/quespaper.txt";
         putQuestion($filename);
-    ?>    
+    ?>  
 </body>
 </html>

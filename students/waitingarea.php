@@ -30,32 +30,12 @@
             margin-top:5px;
             margin-bottom:5px;
         }
-        .glow {
-            font-size: 30px;
-            color: #F39C12;
-            /*font-weight: bold;*/
-            animation: glow 1s ease-in-out infinite alternate;
-            -moz-animation: glow 1s ease-in-out infinite alternate;
-            -webkit-animation: glow 1s ease-in-out infinite alternate;
-            text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
-            letter-spacing:4px;
-        }
-        .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: black;
-        }
         </style>
         <script>            
-            function openExam(){
-                window.open('question-paper.php', '_blank');
-            }
-            
+            var x = 0
             //Enable start button
-            
-            setInterval(() => {
+            setInterval(enableBtn, 1000);
+            function enableBtn(){
                 const timeNow = new Date();
 
                 var hoursOfDay = timeNow.getHours();
@@ -83,16 +63,33 @@
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
                 var time = hoursOfDay + ":" + minutes + ":" + seconds;
-                if(time === stime){
-                    alert("time metched");
+                
+                var strtime = document.getElementById('stime').innerHTML;
+                if(time == strtime){
+                    addElement();
+                    document.getElementById('startBtn').removeAttribute("disabled");
                 }
-            }, 1000);
-            
+                else if(time >= strtime){
+                    document.getElementById('startBtn').removeAttribute("disabled");
+                }
+            }
+            window.onload = function(){
+                enableBtn();
+            }
+
+            function addElement(){
+                var ele = document.getElementById('aldiv');
+                const msg = document.createTextNode('You Can Start Your Exam');
+                ele.appendChild(msg);
+                ele.classList.add("alert");
+                ele.classList.add("alert-success");
+            }
         </script>
     <title>Waiting Area</title>
 </head>
 <body>
     <p style="margin:10px;">Scheduled Exams</p>
+    <div id=aldiv> </div>
     <div style="display:flex; align-items:center;">
         <?php
             error_reporting(E_ERROR | E_PARSE);
@@ -128,13 +125,12 @@
                                     <label class="text-muted"> Subject: </label> '.$row['subject'].'<br>
                                     <label class="text-muted"> Subject Code: </label> '.$row['subject_code'].'<br>
                                     <label class="text-muted"> Date of Exam: </label> '.$row['date_of_exam'].'<br>
-                                    <label class="text-muted"> Start Time: </label> '.$row['start_time'].'<br>
+                                    <label class="text-muted"> Start Time: </label> <span id="stime">'.$row['start_time'].'</span><br>
                                     <label class="text-muted"> End Time: </label> '.$row['end_time'].'<br>
-                                    <label class="text-muted"> Starts in: </label> '.$row['end_time'].'<br>
                                     <div class="d-grid gap-2">
-                                        <form action="question-paper.php" method="GET" class="form-group">
+                                        <form action="question-paper.php" method="post">
                                             <input type="hidden" class="form-control" name="quespaper" value="'.$row['Question_paper_name'].'"/>
-                                            <button type="button" onclick="openExam();" class="btn btn-outline-success" style="margin-top:15px;"> Start </button>
+                                            <button disabled type="submit" class="btn btn-success" style="margin-top:15px;" id="startBtn"> Start </button>
                                         </form>
                                     </div> 
                                 </div>';

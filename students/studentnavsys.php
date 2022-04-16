@@ -49,9 +49,7 @@
             }
             window.onload = function(){
                 displayTime();
-            }
-
-            
+            }           
             
     </script>
 </head>

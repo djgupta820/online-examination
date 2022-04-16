@@ -1,69 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script type="text/JavaScript">
-        function disableBtn(){
-            var x = document.getElementById('btn');
-            x.disabled = true;
-        }
-        function enableBtn(){
-            var x = document.getElementById('btn');
-            var y = document.getElementById('chk');
-            if(y.checked == true){
-                x.disabled = true;
-            }
-            else{
-                x.disabled = false;
-            }
-            
-        }
-        setInterval(displayTime, 1000);
-        function displayTime() {
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Camera</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <script>
+      (function () {
+  if (
+    !"mediaDevices" in navigator ||
+    !"getUserMedia" in navigator.mediaDevices
+  ) {
+    alert("Camera API is not available in your browser");
+    return;
+  }
 
-            const timeNow = new Date();
+  // get page elements
+  const video = document.querySelector("#video");
+  const btnPlay = document.querySelector("#btnPlay");
+  const btnPause = document.querySelector("#btnPause");
+  const btnScreenshot = document.querySelector("#btnScreenshot");
+  const btnChangeCamera = document.querySelector("#btnChangeCamera");
+  const screenshotsContainer = document.querySelector("#screenshots");
+  const canvas = document.querySelector("#canvas");
+  const devicesSelect = document.querySelector("#devicesSelect");
 
-            var hoursOfDay = timeNow.getHours();
-            var minutes = timeNow.getMinutes();
-            var seconds = timeNow.getSeconds();
-            var weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-            var today = weekDay[timeNow.getDay()];
-            var months = timeNow.toLocaleString("default", {
-                month: "long"
-            });
-            var year = timeNow.getFullYear();
-            var period = "AM";
+  // video constraints
+  const constraints = {
+    video: {
+      width: {
+        min: 1280,
+        ideal: 1920,
+        max: 2560,
+      },
+      height: {
+        min: 720,
+        ideal: 1080,
+        max: 1440,
+      },
+    },
+  };
 
-            if (hoursOfDay > 12) {
-                hoursOfDay-= 12;
-                period = "PM";
-            }
+  // use front face camera
+  let useFrontCamera = true;
 
-            if (hoursOfDay === 0) {
-                hoursOfDay = 12;
-                period = "AM";
-            }
+  // current video stream
+  let videoStream;
 
-            hoursOfDay = hoursOfDay < 10 ? "0" + hoursOfDay : hoursOfDay;
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
+  // handle events
+  // play
+  btnPlay.addEventListener("click", function () {
+    video.play();
+    btnPlay.classList.add("is-hidden");
+    btnPause.classList.remove("is-hidden");
+  });
 
-            var time = hoursOfDay + ":" + minutes + ":" + seconds;
-            
-            document.getElementById('Clock').innerHTML = time;   
+  // pause
+  btnPause.addEventListener("click", function () {
+    video.pause();
+    btnPause.classList.add("is-hidden");
+    btnPlay.classList.remove("is-hidden");
+  });
 
-            }
-            window.onload = function(){
-                displayTime();
-            }
-    </script>
-    <title>Test Page</title>
+  // take screenshot
+  btnScreenshot.addEventListener("click", function () {
+    const img = document.createElement("img");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext("2d").drawImage(video, 0, 0);
+    img.src = canvas.toDataURL("image/png");
+    screenshotsContainer.prepend(img);
+  });
+
+  // switch camera
+  btnChangeCamera.addEventListener("click", function () {
+    useFrontCamera = !useFrontCamera;
+
+    initializeCamera();
+  });
+
+  // stop video stream
+  function stopVideoStream() {
+    if (videoStream) {
+      videoStream.getTracks().forEach((track) => {
+        track.stop();
+      });
+    }
+  }
+
+  // initialize
+  async function initializeCamera() {
+    stopVideoStream();
+    constraints.video.facingMode = useFrontCamera ? "user" : "environment";
+
+    try {
+      videoStream = await navigator.mediaDevices.getUserMedia(constraints);
+      video.srcObject = videoStream;
+    } catch (err) {
+      alert("Could not access the camera");
+    }
+  }
+
+  initializeCamera();
+})();
+  </script>
 </head>
+
 <body>
-    <p id="Clock"></p>
-    
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-four-fifths">
+          <h1 class="title">
+            JavaScript Camera
+          </h1>
+          <video autoplay id="video"></video>
+          <button class="button is-hidden" id="btnPlay">
+            <span class="icon is-small">
+              <i class="fas fa-play"></i>
+            </span>
+          </button>
+          <button class="button" id="btnPause">
+            <span class="icon is-small">
+              <i class="fas fa-pause"></i>
+            </span>
+          </button>
+          <button class="button is-success" id="btnScreenshot">
+            <span class="icon is-small">
+              <i class="fas fa-camera"></i>
+            </span>
+          </button>
+          <button class="button" id="btnChangeCamera">
+            <span class="icon">
+              <i class="fas fa-sync-alt"></i>
+            </span>
+            <span>Switch camera</span>
+          </button>
+        </div>
+        <div class="column">
+          <h2 class="title">Screenshots</h2>
+          <div id="screenshots"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        By <a href="https://www.webdevdrops.com/">Douglas Matoso</a> | <a
+          href="https://github.com/doug2k1/javascript-camera">Source code</a>
+      </p>
+    </div>
+  </footer>
+
+  <canvas class="is-hidden" id="canvas"></canvas>
+  <script src="script.js"></script>
+
+  <input type="radio" name="radio" id="">
+  <label for="radio">Option</label>
 </body>
+
 </html>

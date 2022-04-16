@@ -27,8 +27,6 @@
                     setcookie("stfname", $row['First_Name'], time() + (86400/24), "/");      //86400 is for 1 day
                     setcookie("stlname", $row['Last_Name'], time() + (86400/24), "/");
                     setcookie("strollno", $row['Roll_Number'], time() + (86400/24), "/");
-                    /*setcookie("course", $row['Course'], time() + (86400), "/");
-                    setcookie("semester", $row['Semester'], time() + (86400), "/");*/
                     setcookie("stpasswd", $row['Login_Password'], time() + (86400/24), "/");
 
                     $script =  "<script>
