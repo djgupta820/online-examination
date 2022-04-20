@@ -11,6 +11,7 @@
         $etype = $_POST['extype'];
         $doe = $_POST['dateofexam'];
         
+        print($stime."<br>".$etime."<br>".$doe);
         function uploadFile(){
             if(isset($_COOKIE['tusername'])){
                 $filename = $_FILES['fileToUpload']['name'];
@@ -36,7 +37,7 @@
                 }
             }
         }
-        
+        /*
         if(uploadFile()){
             $conn = new mysqli('localhost', 'root', '', 'btts');
             $filename = $_POST['course']."_".$_POST['semester']."_".$_POST['sub']."_".date("Ymd").date("his").".txt";
@@ -61,5 +62,5 @@
                 print($script);
             }
 
-        }
+        }*/
 ?>

@@ -1,3 +1,31 @@
+<?php
+  function createTabel($course, $sem){
+    $conn = new mysqli("localhost", "root", "", "btts");
+    $sql = "create table subjects(
+      course_name varchar(50) not null,
+      semester int not null,
+      subject_name varchar(100) not null,
+      subject_code varchar(10) primary key
+    )";
+    if($conn->query($sql)){
+      echo "Table Created: subjects";
+    }
+    else{
+      echo "table not created";
+    }
+    $conn->close();
+  }
+
+  function insertData(){
+    $conn = new mysqli("localhost", "root", "", "btts");
+    $sql = "insert into subjects values(
+
+    )";
+  }
+  createTabel("bca","first");
+  
+?>
+<!--
 <!DOCTYPE html>
 <html lang="en">
 
@@ -163,4 +191,4 @@
   <label for="radio">Option</label>
 </body>
 
-</html>
+</html> -->

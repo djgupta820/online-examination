@@ -66,10 +66,54 @@
             print("<a href='index.php' class='btn btn-primary'> Home </a>");
             print("</form>");
         }
-
+        function puttabular($filename){
+            $file = fopen($filename, "r");
+            print('<h3>Question Paper Preview</h3>');
+            $table = "  <table>
+                        <thead>
+                            <tr>
+                                <td>S. No. </td>
+                                <td> Question </td>
+                                <td> Option 1 </td>
+                                <td> Option 2 </td>
+                                <td> Option 3 </td>
+                                <td> Option 4 </td>
+                                <td> Answer </td>
+                            </tr>
+                        </thead>";
+            
+            while(!feof($file)){
+                $q = 1;
+                $line = fgets($file);
+                print("<tr>");
+                print("<td>".$q."</td>");
+                if(is_numeric($line[0])){
+                    print("<td>".$line."</td>");
+                }
+                else{
+                    $op++;
+                    $id++;
+                    if($op === 5){
+                        $op = 0;
+                    }
+                    $inp = "
+                            <tr>
+                                <td> $op </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                            </tr>
+                            ";
+                    print($inp);
+                } 
+            }
+            print("</table>");
+        }
         chdir(".."); 
         $filename = "uploads/quespaper.txt";
-        putQuestion($filename);
+        puttabular($filename);
     ?>  
 </body>
 </html>

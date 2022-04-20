@@ -75,16 +75,16 @@
               <div class="form-group">
                   <label for="semester">Select Semester</label>
                   <select name="semester" class="form-control" required>
-                  <option value="sel">Select</option>
-                  <option value="1">First</option>
-                  <option value="2">Second</option>
-                  <option value="3">Third</option>
-                  <option value="4">Forth</option>
-                  <option value="5">Fifth</option>
-                  <option value="6">Sixth</option>
-                  <option value="7">Seventh</option>
-                  <option value="8">Eighth</option>
-                </select>
+                    <option value="sel">Select</option>
+                    <option value="1">First</option>
+                    <option value="2">Second</option>
+                    <option value="3">Third</option>
+                    <option value="4">Forth</option>
+                    <option value="5">Fifth</option>
+                    <option value="6">Sixth</option>
+                    <option value="7">Seventh</option>
+                    <option value="8">Eighth</option>
+                  </select>
               </div>
               <div class="form-group">
                 <label for="sub">Subject</label>
@@ -96,15 +96,21 @@
               </div>
               <div class="form-group">
                 <label for="subcode">Date of Exam</label>
-                <input type="text" class="form-control" name="dateofexam" id="dateofexam" placeholder="yyyy-mm-dd" required>
+                <input type="date" class="form-control" name="dateofexam" id="dateofexam" placeholder="yyyy-mm-dd" required>
+              </div>
+              <div class="form-inline">
+                <label for="stime">Start Time</label>
+                <input type="time" name="stime" placeholder="hrs:mins" class="form-control" required>
               </div>
               <div class="form-group">
-                <label for="stime">Start Time</label>
-                <input type="text" class="form-control" name="stime" id="stime" placeholder="12:00:00" required>
+                <select name="ampm" id="ampm" class="form-control">
+                  <option value="AM">AM</option>
+                  <option value="PM">PM</option>
+                </select>
               </div>
               <div class="form-group">
                 <label for="etime">End Time</label>
-                <input type="text" class="form-control" name="etime" id="etime" placeholder="12:00:00" required>
+                <input type="time" name="etime" placeholder="hrs:mins" class="form-control" required>
               </div>
               <div class="form-group">
                 <label for="extype">Exam Type</label>
