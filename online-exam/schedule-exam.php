@@ -103,12 +103,6 @@
                 <input type="time" name="stime" placeholder="hrs:mins" class="form-control" required>
               </div>
               <div class="form-group">
-                <select name="ampm" id="ampm" class="form-control">
-                  <option value="AM">AM</option>
-                  <option value="PM">PM</option>
-                </select>
-              </div>
-              <div class="form-group">
                 <label for="etime">End Time</label>
                 <input type="time" name="etime" placeholder="hrs:mins" class="form-control" required>
               </div>
@@ -121,11 +115,14 @@
                 </select>
               </div>
               <div class="form-group">
-                  <label for="file"> <h1>Upload File </h1></label>
+                  <label for="file"> <h1>Upload Questions File </h1></label>
                   <p style="color:red;"> * file must be text type (.txt)</p>
-                  <input type="file" name="fileToUpload" class="form-control" id="fileToUpload"><br>
-                  <!-- <button tupe="button" class="btn btn-primary" name="submit" style="margin-top:20px;">Done</button> 
-                  <a href="scheduleexam.php" class="btn btn-primary" style="margin-top:20px;float:right;"> Back </a> -->
+                  <input type="file" name="qfileToUpload" class="form-control" id="qfileToUpload"><br>
+              </div>
+              <div class="form-group">
+                  <label for="file"> <h1>Upload Answers File </h1></label>
+                  <p style="color:red;"> * file must be text type (.txt)</p>
+                  <input type="file" name="afileToUpload" class="form-control" id="afileToUpload"><br>
               </div>
               <button class="btn btn-primary"> Schedule </button>
             </form>

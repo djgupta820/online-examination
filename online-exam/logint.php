@@ -26,10 +26,10 @@
                         if (isset($_COOKIE['tpasswd'])) {
                             unset($_COOKIE['tpasswd']); 
                         }
-                        setcookie("tusername", $username, time() + (86400), "/");                        
-                        setcookie("tpasswd", $passwd, time() + (86400), "/");
-                        setcookie("tfname", $row['First_name'], time() + (86400), "/");
-                        setcookie("tlname", $row['Last_name'], time() + (86400), "/");
+                        setcookie("tusername", $username, time() + (86400)/24, "/");                        
+                        setcookie("tpasswd", $passwd, time() + (86400)/24, "/");
+                        setcookie("tfname", $row['First_name'], time() + (86400)/24, "/");
+                        setcookie("tlname", $row['Last_name'], time() + (86400)/24, "/");
                         return true;
                     }
                 }
@@ -42,21 +42,12 @@
 
         public function login(){
             
-            error_reporting(E_ERROR | E_PARSE);/*
-            if($this->is_valid($_COOKIE['username'] ,$_COOKIE['passwd'])){
-                print("<script>alert('Login Successfull!');</script>");
-                print("<script>window.open('index.php', '_self');</script>");  
-                exit();
-            }*/
+            error_reporting(E_ERROR | E_PARSE);
 
             if($this->is_valid($_POST["username"], $_POST["password"])){
                 print("<script>alert('Login Successfull}!');</script>");
                 print("<script>window.open('index.php', '_self');</script>");
-            }/*
-            else{
-                print("<script>alert('Invalid Credentials!');</script>");
-                print("<script> window.open('login.php', '_self'); </script>");
-            }*/
+            }
             
         }
     }

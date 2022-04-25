@@ -17,7 +17,7 @@
 
         function openStudentList()
         {
-            window.open("studentlist.php", "_self");
+            window.open("student-list.php", "_self");
         }
 
         function openCourses()
@@ -27,12 +27,12 @@
 
         function openPreviousExams()
         {
-            window.open("previousexams.php", "_self");
+            window.open("previous-exams.php", "_self");
         }
 
         function openScheduleExam()
         {
-            window.open("scheduleexam.php", "_self");
+            window.open("schedule-exam.php", "_self");
         }
 
         function openProfile()

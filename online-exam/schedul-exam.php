@@ -11,43 +11,73 @@
         $etype = $_POST['extype'];
         $doe = $_POST['dateofexam'];
         
-        print($stime."<br>".$etime."<br>".$doe);
-        function uploadFile(){
+        function uploadQuestionFile(){
             if(isset($_COOKIE['tusername'])){
-                $filename = $_FILES['fileToUpload']['name'];
+                $filename = $_FILES['qfileToUpload']['name'];
                 $newfilename = $_POST['course']."_".$_POST['semester']."_".$_POST['sub']."_".date("Ymd").date("his").".txt";
                 rename($filename, $newfilename);
-                $temp_dir = $_FILES['fileToUpload']['tmp_name'];
-                $target_dir = "uploads/".$newfilename;
-                $filetype = $_FILES['fileToUpload']['type'];
+                $temp_dir = $_FILES['qfileToUpload']['tmp_name'];
+                $target_dir = "uploads/questions/".$newfilename;
+                $filetype = $_FILES['qfileToUpload']['type'];
                 chdir("..");
                 if(move_uploaded_file($temp_dir, $target_dir)){
                     $msg = '<script> 
-                                alert("File Uploaded Successfully!");
+                                alert("Questions File Uploaded Successfully!");
                             </script>';
                     print($msg);
                     return true;
                 }
                 else{
                     $msg = '<script> 
-                                alert("Error Uploading File!!");
+                                alert("Error Uploading Questions File!!");
                             </script>';
                     print($msg);
                     return false;
                 }
             }
         }
-        /*
-        if(uploadFile()){
+        
+        function uploadAnswerFile(){
+            if(isset($_COOKIE['tusername'])){
+                $filename = $_FILES['afileToUpload']['name'];
+                $newfilename = $_POST['course']."_".$_POST['semester']."_".$_POST['sub']."_".date("Ymd").date("his").".txt";
+                rename($filename, $newfilename);
+                $temp_dir = $_FILES['afileToUpload']['tmp_name'];
+                $target_dir = "uploads/answers/".$newfilename;
+                $filetype = $_FILES['afileToUpload']['type'];
+                //chdir("..");
+                if(move_uploaded_file($temp_dir, $target_dir)){
+                    $msg = '<script> 
+                                alert("Answers File Uploaded Successfully!");
+                            </script>';
+                    print($msg);
+                    return true;
+                }
+                else{
+                    $msg = '<script> 
+                                alert("Error Uploading Answers File!!");
+                                
+                            </script>';
+                    print($msg);
+                    return false;
+                }
+            }
+        }
+
+        if(uploadQuestionFile() && uploadAnswerFile()){
             $conn = new mysqli('localhost', 'root', '', 'btts');
-            $filename = $_POST['course']."_".$_POST['semester']."_".$_POST['sub']."_".date("Ymd").date("his").".txt";
+            $qfilename = $_POST['course']."_".$_POST['semester']."_".$_POST['sub']."_".date("Ymd").date("his").".txt";
+            $afilename = $_POST['course']."_".$_POST['semester']."_".$_POST['sub']."_".date("Ymd").date("his").".txt";
+            $tablename = $_POST['course']."_".$_POST['semester']."_".$_POST['sub']."_".date("Y_m_d");
             $sql = "insert into exams(
                     course_name, semester, subject, subject_code, date_of_exam, 
-                    start_time, end_time, scheduled_by, exam_type, Question_paper_name
+                    start_time, end_time, scheduled_by, exam_type, Question_paper_name,
+                    answer_file_name
                     ) 
-                    values('".$course."',".$sem.",'".$subj."','".$subj_code."','".$doe."','".$stime."','".$etime."','".$_COOKIE['tfname']." ".$_COOKIE['tlname']."','".$etype."','".$filename."')";
+                    values('".$course."',".$sem.",'".$subj."','".$subj_code."','".$doe."','".$stime."','".$etime."','".$_COOKIE['tfname']." ".$_COOKIE['tlname']."','".$etype."','".$afilename."','".$afilename."')";
 
             if($conn->query($sql)){
+                
                 $script = " <script> 
                                 alert('Exam Scheduled Successfully!');
                                 window.open('question-paper.php', '_self');
@@ -62,5 +92,5 @@
                 print($script);
             }
 
-        }*/
+        }
 ?>

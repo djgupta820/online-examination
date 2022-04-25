@@ -1,5 +1,7 @@
 <?php
+  error_reporting(0);
   print('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">');
+  print('<link rel="icon" type="image/png" sizes="16x16" href="../assets/images/bttslogo.png">');
   if(!isset($_COOKIE['tusername'])){
       $script = " <div class='alert alert-danger'>
                       <p>Access Denied! Login Required!</p>
@@ -52,7 +54,7 @@
                           $pass = "";
                           $db = "btts";
                           $conn = new mysqli($host, $user, $pass, $db);
-                          $sql = "select course_name, semester, subject, subject_code, date_of_exam, start_time, end_time, scheduled_by, Question_paper_name, exam_type from exams"; 
+                          $sql = "select course_name, semester, subject, subject_code, date_of_exam, start_time, end_time, scheduled_by, Question_paper_name, exam_type from exams order by date_of_exam desc"; 
                           
                           $res = $conn->query($sql);
                           if($res->num_rows > 0){
@@ -70,7 +72,12 @@
                                 print("<td>".$row['scheduled_by']."</td>");
                                 print("<td>".$row['Question_paper_name']."</td>");
                                 print("<td>".$row['exam_type']."</td>");
-                                print('<td> <form action="question-paper.php"> <button class="btn btn-outline-success"> View </button> </form> </td>');
+                                if($$row['end_time'] <= (string)date("h:i:s")){
+                                  print('<td> <form action="result.php"> <a href="result.php" class="btn btn-outline-success"> View Result </a> </form> </td>');
+                                }
+                                else{
+                                  print('<td> <form action="result.php"> <a href="question-paper.php" class="btn btn-outline-success"> View Question Paper </a> </form> </td>');
+                                }
                                 print("</tr>");
                                 $i++;
                             }

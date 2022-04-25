@@ -30,8 +30,8 @@
     }
     else{
         $sql = "Insert into students(
-            First_Name, Last_Name, Date_of_Birth, Address, Mobile_Number, Roll_Number, Course, Semester, Login_Password) 
-            values('".$fname."','".$lname."','".$dob."','".$addr."',".$phone.",".$rollno.",'".$course."',".$sem.",'".md5($passwd)."')";
+            First_Name, Last_Name, Date_of_Birth, Address, Mobile_Number, Roll_Number, Course, Semester, Login_Password, registered_at) 
+            values('".$fname."','".$lname."','".$dob."','".$addr."',".$phone.",".$rollno.",'".$course."',".$sem.",'".md5($passwd)."','".date("y-m-d h:i:s")."')";
             if($conn->query($sql)){
                 $scrpt = "  <script>
                                 alert('Register Successfull!');

@@ -1,5 +1,6 @@
 <?php
   print('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">');
+  print('<link rel="icon" type="image/png" sizes="16x16" href="../assets/images/bttslogo.png">');
   if(!isset($_COOKIE['tusername'])){
       $script = " <div class='alert alert-danger'>
                       <p>Access Denied! Login Required!</p>
@@ -40,6 +41,25 @@
             </div>
           </div>
         </div>
+                      <?php
+                          $host = "localhost";
+                          $user = "root";
+                          $pass = "";
+                          $db = "btts";
+                          $conn = new mysqli($host, $user, $pass, $db);
+                          $sql = "select course_name from exams "; 
+                          
+                          $res = $conn->query($sql);
+                          if($res->num_rows <= 0){
+                            $script ="<div class='alert alert-info'>
+                                        <p> No exam is Scheduled!</p>
+                                      </div>";
+                            print($script);
+                            $conn->close();
+                            exit(); 
+                            }                          
+                      ?>
+                      
         <div class="container">
             <table class="table table-hover table-bordered table-dark">
                 <thead>
@@ -61,7 +81,7 @@
                           $pass = "";
                           $db = "btts";
                           $conn = new mysqli($host, $user, $pass, $db);
-                          $sql = "select course_name, semester, subject, date_of_exam, start_time, scheduled_by from exams"; 
+                          $sql = "select course_name, semester, subject, date_of_exam, start_time, scheduled_by from exams order by date_of_exam desc"; 
                           
                           $res = $conn->query($sql);
                           if($res->num_rows > 0){
@@ -79,6 +99,7 @@
                                 $i++;
                             }
                           }
+                          $conn->close();
                       ?>
                       
                   </tbody>

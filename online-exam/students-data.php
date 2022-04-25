@@ -18,28 +18,6 @@
 
         public function closeConn(){
             $conn->close();
-            print("<br>connection Successfull closed");
-        }
-
-        public function createTable($course, $semester){
-            $conn = $this->checkConn();
-            $sql = "create table ". $course."(
-                First_Name varchar(15) not null,
-                Last_Name varchar(15) not null,
-                Date_of_Birth date not null,
-                Address varchar(50) not null,
-                Mobile_Number bigint not null unique,
-                Roll_Number bigint primary key,
-                Course char(30) not null, 
-                Semester int not null
-            )";
-
-            if ($conn->query($sql) === TRUE){
-                print("<br>Table ". $course." created successfully");
-            }
-            else{
-                die("Error creating table".$conn->error);
-            }
         }
 
         public function getData(){
@@ -50,6 +28,8 @@
             $sql = "select First_Name,Last_Name,Date_of_Birth,Address,Mobile_Number, Roll_Number, Course, Semester from students where Course='".$course."' and Semester = ".$sem;
             $res = $conn->query($sql);
             print('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">');
+            print('<link rel="icon" type="image/png" sizes="16x16" href="../assets/images/bttslogo.png">');
+            print("<title>Students List </title>");
             if($res->num_rows > 0){
                 
                 print("<div style='margin:20px;'><h1 style='text-align:center; text-decoration:underline;'>".strtoupper($course)." Students List</h1>");

@@ -34,7 +34,44 @@
         #results { padding:10px; border:1px solid; background:#ccc; height:380px; width:380px; }
     </style>
     <script>
-        
+        setInterval(enableBtn, 1000);
+            function enableBtn(){
+                const timeNow = new Date();
+
+                var hoursOfDay = timeNow.getHours();
+                var minutes = timeNow.getMinutes();
+                var seconds = timeNow.getSeconds();
+                var weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+                var today = weekDay[timeNow.getDay()];
+                var months = timeNow.toLocaleString("default", {
+                    month: "long"
+                });
+                var year = timeNow.getFullYear();
+                var period = "AM";
+
+                if (hoursOfDay > 12) {
+                    hoursOfDay-= 12;
+                    period = "PM";
+                }
+
+                if (hoursOfDay === 0) {
+                    hoursOfDay = 12;
+                    period = "AM";
+                }
+
+                hoursOfDay = hoursOfDay < 10 ? "0" + hoursOfDay : hoursOfDay;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                var time = hoursOfDay + ":" + minutes + ":" + seconds;
+                
+                var endtime = document.getElementById('etime').innerHTML;
+                else if(time >= endtime){
+                    document.getElementById('quespaper').submit(); 
+                }
+            }
+            window.onload = function(){
+                enableBtn();
+            }
     </script>
     <title>Question Paper</title>
 </head>
@@ -53,71 +90,41 @@
                 */
                                     
                 function putQuestion($filename){
-                    $ans = 0;
-                    $op = 0;
                     $file = fopen($filename, "r");
-                    print("<form action='results.php' method='post'>");
+                    $ctr = 0;
+                    print('<div class="container"> <form action="results.php" method="post" name="quespaper">');
                     while(!feof($file)){
                         $line = fgets($file);
                         if(is_numeric($line[0])){
-                            print("<h4>$line</h4>");
-                        }
-                        else if(substr($line, 0, 5) == "Answer"){
-                            print('<input type="hidden" name="answer" value="'.$line.'">');
+                            $ctr++;
+                            print("<h3> $line </h3>");
+                            
+                            setcookie("ctr", $ctr, time()+(86400*2), "/");
                         }
                         else{
-                            $op++;
-                            $ans++;
-                            if($op === 5){
-                                $op = 0;
-                            }
-                            $script  = "<div> 
-                                            <p> <input type='radio' name='".$op."ques'> " .$line."</p>
-                                        </div>
-                                        ";
-                            $op++;
-                            print($script);
+                            print("<p> <input type='radio' name=\"question$ctr\" value=\"$line\"> $line </p>");
                         }
-                        $ans++;
                     }
-                    print("</form>");
+                    print("<input type='hidden' name='ctr' value=".$ctr.">");
+                    print('<input type="hidden" name="ansfile" value=uploads/answers/'.$row['Question_paper_name'].'>');
+                    print('<button type="submit" class="btn btn-primary"> Submit </button>');
+                    print('</form> </div>');
+                }
                     
-                    
-                    /*print("<div class='content'>");
-                    print("<form action='results.php' method='post'>");
-                    
-                    while(!feof($file)){
-                        print('<div class="">');
-                        $line = fgets($file);
-                        if(is_numeric($line[0])){
-                            print("<div style='padding-left:20px;'> <h3>".$line."</h3> </div>");
-                        }
-                        else{
-                            $op++;
-                            if($op === 5){
-                                $op = 0;
-                            }
-                            $inp = "<div style='padding-left:30px;>' 
-                                        <div class='form-check'>
-                                            <input class='form-check-input' type='radio' name='flexRadioDefault' id='flexRadioDefault1'>
-                                            <label class='form-check-label' for='flexRadioDefault1' name=\"option$op\">
-                                            $line
-                                            </label>
-                                        </div>
-                                    </div>";
-                            print($inp);
-                        } 
-                        //print('</div>');
-                    }*/
-                    print("<button type='submit' class='btn btn-primary' style='margin:40px;'> Submit </button>");
+
+                $conn = new mysqli("localhost", "root", "","btts");
+                $sql = "select Question_paper_name from exams where date_of_exam = '".date("y-m-d")."'";
+                $res = $conn->query($sql);
+                if($res->num_rows > 0){
+                    $row = $res->fetch_assoc();
                 }
 
-                
                 chdir(".."); 
-                $filename = "uploads/".$_POST['quespaper'];
+                $filename = "uploads/questions/".$row['Question_paper_name'];
                 print('<div class="content" style="margin:20px;">');
-                    putQuestion($filename);
+                putQuestion($filename);
                 print('</div>');
+                $conn->close();
             ?>
         </div>
         <!-- for camera -->
@@ -126,7 +133,7 @@
                 <form method="POST" action="storeImage.php">
                     <div class="row">
                         <div class="col-md-6">
-                            <div id="my_camera"></div>
+                            <div id="my_camer"></div>
                         </div>           
                     </div>
                 </form>

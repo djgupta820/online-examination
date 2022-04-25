@@ -9,10 +9,10 @@
         print($script);
         exit();
     }
-    setcookie("rollno", $_COOKIE['rollno'], time() - 3600);
-    setcookie("passwd", $_COOKIE['passwd'], time() - 3600);
-    setcookie("fname", $_COOKIE['fname'], time() - 3600);
-    setcookie("lname", $_COOKIE['lname'], time() - 3600);
+    setcookie("strollno", $_COOKIE['rollno'], time() - 3600);
+    setcookie("stpasswd", $_COOKIE['passwd'], time() - 3600);
+    setcookie("stfname", $_COOKIE['fname'], time() - 3600);
+    setcookie("stlname", $_COOKIE['lname'], time() - 3600);
 
     $msg = '<div class="alert alert-success" role="alert">
                 Logout Successfull!

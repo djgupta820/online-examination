@@ -111,31 +111,45 @@
                 die("Connection Error");
             }
             else{
-                $sql = "select course_name, subject, subject_code, date_of_exam, start_time, 
-                        end_time, Question_paper_name
+                /*$sql1 = "select Course, Semester from students where Roll_Number = ".$_COOKIE['strollno'];
+                $sres = $conn->query($sql1);
+                if($sres->num_rows > 0){
+                    $row = $sres->fetch_assoc();
+                    $sco = $row['Course'];
+                    $ssem = $row['Semester'];   
+                }*/
+
+                $sql = "select course_name, semester, subject, subject_code, date_of_exam, time_format(start_time, '%r') as start_time, 
+                        time_format(end_time, '%r') as end_time, Question_paper_name
                         from exams
                         where date_of_exam = '".date("y-m-d")."'";
+
                 $res = $conn->query($sql);
                 if($res->num_rows > 0){
-                    $i=1;
-                    while($row = $res->fetch_assoc()){
-                        
-                        $bx = ' <div class="box">
-                                    <label class="text-muted"> Course Name: </label> '.$row['course_name'].'<br>
-                                    <label class="text-muted"> Subject: </label> '.$row['subject'].'<br>
-                                    <label class="text-muted"> Subject Code: </label> '.$row['subject_code'].'<br>
-                                    <label class="text-muted"> Date of Exam: </label> '.$row['date_of_exam'].'<br>
-                                    <label class="text-muted"> Start Time: </label> <span id="stime">'.$row['start_time'].'</span><br>
-                                    <label class="text-muted"> End Time: </label> '.$row['end_time'].'<br>
-                                    <div class="d-grid gap-2">
-                                        <form action="question-paper.php" method="post">
-                                            <input type="hidden" class="form-control" name="quespaper" value="'.$row['Question_paper_name'].'"/>
-                                            <button disabled type="submit" class="btn btn-success" style="margin-top:15px;" id="startBtn"> Start </button>
-                                        </form>
-                                    </div> 
-                                </div>';
-                        print($bx);
-                    }
+                    /*$row = $res->fetch_assoc();
+                    
+                    if(($sco === $row['course_name']) && ($ssem === $row['semester'])){*/
+                        $i=1;
+                        while($row = $res->fetch_assoc()){
+                            
+                            $bx = ' <div class="box">
+                                        <label class="text-muted"> Course Name: </label> '.$row['course_name'].'<br>
+                                        <label class="text-muted"> Course Name: </label> '.$row['semester'].'<br>
+                                        <label class="text-muted"> Subject: </label> '.$row['subject'].'<br>
+                                        <label class="text-muted"> Subject Code: </label> '.$row['subject_code'].'<br>
+                                        <label class="text-muted"> Date of Exam: </label> '.$row['date_of_exam'].'<br>
+                                        <label class="text-muted"> Start Time: </label> <span id="stime">'.$row['start_time'].'</span><br>
+                                        <label class="text-muted"> End Time: </label> <span id="etime">'.$row['end_time'].'</span><br>
+                                        <div class="d-grid gap-2">
+                                            <form action="question-paper.php" method="post">
+                                                <input type="hidden" class="form-control" name="quespaper" value="'.$row['Question_paper_name'].'"/>
+                                                <button disabled type="submit" class="btn btn-success" style="margin-top:15px;" id="startBtn"> Start </button>
+                                            </form>
+                                        </div> 
+                                    </div>';
+                            print($bx);
+                        }
+                    //}
                 }
                 else{
                     $script = " <div class='alert alert-warning'>

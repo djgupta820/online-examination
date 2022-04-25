@@ -38,82 +38,26 @@
         error_reporting(E_ERROR | E_PARSE);
 
         function putQuestion($filename){
-            $id = 0;
-            $op = 0;
             $file = fopen($filename, "r");
-            print("<form action='' method='post'>");
-            print('<h3>Question Paper Preview</h3>');
+            $ctr = 0;
+            print('<div class="container"> <form action="students/results.php" method="post">');
             while(!feof($file)){
-                $line = fgets($file);
-                if(is_numeric($line[0])){
-                    print("<h3>".$line."</h3>");
-                }
-                else{
-                    $op++;
-                    $id++;
-                    if($op === 5){
-                        $op = 0;
-                    }
-                    $inp = "<div class='form-check'>
-                                <input class='form-check-input' type='radio' name='flexRadioDefault' id='flexRadioDefault1'>
-                                <label class='form-check-label' for='flexRadioDefault1' name=\"option$op\" id=\"id$id\">
-                                $line
-                                </label>
-                            </div>";
-                    print($inp);
-                } 
+            $line = fgets($file);
+            if(is_numeric($line[0])){
+                print("<h3> $line </h3>");
+                $ctr++;
             }
-            print("<a href='index.php' class='btn btn-primary'> Home </a>");
-            print("</form>");
-        }
-        function puttabular($filename){
-            $file = fopen($filename, "r");
-            print('<h3>Question Paper Preview</h3>');
-            $table = "  <table>
-                        <thead>
-                            <tr>
-                                <td>S. No. </td>
-                                <td> Question </td>
-                                <td> Option 1 </td>
-                                <td> Option 2 </td>
-                                <td> Option 3 </td>
-                                <td> Option 4 </td>
-                                <td> Answer </td>
-                            </tr>
-                        </thead>";
-            
-            while(!feof($file)){
-                $q = 1;
-                $line = fgets($file);
-                print("<tr>");
-                print("<td>".$q."</td>");
-                if(is_numeric($line[0])){
-                    print("<td>".$line."</td>");
-                }
-                else{
-                    $op++;
-                    $id++;
-                    if($op === 5){
-                        $op = 0;
-                    }
-                    $inp = "
-                            <tr>
-                                <td> $op </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            ";
-                    print($inp);
-                } 
+            else{
+                print("<p> <input type='radio' name=\"question$ctr\" value=\"$line\"> $line </p>");
             }
-            print("</table>");
+            }
+            print('</form> </div>');
         }
+                
         chdir(".."); 
-        $filename = "uploads/quespaper.txt";
-        puttabular($filename);
+        $filename = "uploads/questions/quespaper.txt";
+        putQuestion($filename);
+        print('<div style="margin-bottom:20px;"> <a href="index.php" class="btn btn-primary"> Home </a> </div>');
     ?>  
 </body>
 </html>
