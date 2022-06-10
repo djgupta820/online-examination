@@ -138,7 +138,7 @@
                     </div>
                 </form>
             </div>
-            <script language="JavaScript">
+            <!-- <script language="JavaScript">
                 Webcam.set({
                     width: 490,
                     height: 390,
@@ -154,7 +154,7 @@
                         document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
                     } );
                 }
-            </script>
+            </script> -->
             <!--  -->
         </div>
     </div>

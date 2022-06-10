@@ -36,7 +36,7 @@
             $res2 = $conn->query($sql2);
             $row = $res->fetch_assoc();
             $subj = $row['subject'];
-            print("<script>alert('Subject: ".$subj."')</script>");
+            //print("<script>alert('Subject: ".$subj."')</script>");
             $sql = "insert into results(
                         date_of_exam, 
                         student_fullname, 
@@ -159,12 +159,12 @@
         $incorrect = $wrong;
         $marks = $right+$wrong;
         insertData($correct, $incorrect, $marks);
-        if(isset($_POST['question1'])){
+        /*if(isset($_POST['question1'])){
             print("true");
         }
         else{
             print("false");
-        } 
+        } */
     ?>
 </body>
 </html>

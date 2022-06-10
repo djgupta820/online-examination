@@ -22,7 +22,7 @@
             padding:20px;
             margin: auto;
             width: 55%;
-            border:1px solid gray;
+            /*border:1px solid gray;*/
             border-radius:10px;
         }
         .bx button{
